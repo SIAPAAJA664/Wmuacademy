@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>WMU Academy — SSB Wira Mekar Utama</title>
+  
+  <!-- Tailwind CSS & Lucide Icons -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
+          colors: {
+            wmu: {
+              green: '#0e3d22',
+              darkgreen: '#072413',
+              lightgreen: '#1a5c36',
+              gold: '#D4AF37',
+              goldlight: '#FFF9E6'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #F8FAF9; }
+    .gold-gradient { background: linear-gradient(135deg, #DFBA49 0%, #B89220 100%); }
+    .green-gradient { background: linear-gradient(135deg, #0e3d22 0%, #072413 100%); }
+  </style>
+</head>
+<body class="text-gray-800 pb-28 antialiased selection:bg-yellow-500 selection:text-white">
+
+  <!-- TOP HEADER -->
+  <header class="green-gradient text-white sticky top-0 z-30 shadow-md border-b-2 border-yellow-500">
+    <div class="max-w-md mx-auto px-4 py-3.5 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-full gold-gradient flex items-center justify-center text-white font-black text-xl shadow-md border border-white">
+          W
+        </div>
+        <div>
+          <h1 class="font-extrabold text-base tracking-wide flex items-center gap-1.5 leading-tight">
+            WMU ACADEMY
+            <span class="text-[10px] bg-yellow-400 text-gray-900 font-extrabold px-1.5 py-0.5 rounded shadow-sm">SSB</span>
+          </h1>
+          <p class="text-[11px] text-gray-300 font-medium tracking-wide">Wira Mekar Utama</p>
+        </div>
+      </div>
+      <button class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center border border-white/20 active:scale-95 transition">
+        <i data-lucide="bell" class="w-4 h-4 text-yellow-300"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- KONTEN UTAMA DASHBOARD -->
+  <main class="max-w-md mx-auto px-4 pt-4 space-y-4">
+
+    <!-- KARTU SAMBUTAN -->
+    <div class="green-gradient rounded-2xl p-4 text-white shadow-lg relative overflow-hidden border border-yellow-500/30">
+      <div class="flex items-center justify-between">
+        <div>
+          <span class="text-[10px] uppercase tracking-wider text-yellow-300 font-bold bg-yellow-400/20 px-2 py-0.5 rounded border border-yellow-400/30">Portal Resmi</span>
+          <h2 class="text-base font-bold mt-1 text-white">Halo, Manajemen SSB</h2>
+          <p class="text-xs text-gray-200 mt-0.5">Sistem Pembinaan Atlet Usia Dini</p>
+        </div>
+        <div class="text-right">
+          <span class="inline-block text-[10px] font-bold px-2 py-1 bg-yellow-500 text-gray-950 rounded-lg shadow-sm">
+            AKTIF
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- STATISTIK RINGKAS -->
+    <div class="grid grid-cols-2 gap-3">
+      <div class="bg-white p-3.5 rounded-2xl shadow-sm border border-gray-100 flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center">
+          <i data-lucide="users" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <p class="text-[11px] text-gray-500 font-medium">Total Atlet</p>
+          <p class="text-base font-bold text-gray-900 leading-tight">64 Siswa</p>
+        </div>
+      </div>
+
+      <div class="bg-white p-3.5 rounded-2xl shadow-sm border border-gray-100 flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center">
+          <i data-lucide="trophy" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <p class="text-[11px] text-gray-500 font-medium">Turnamen</p>
+          <p class="text-base font-bold text-gray-900 leading-tight">3 Agenda</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- JADWAL LATIHAN TERDEKAT -->
+    <div class="bg-white rounded-2xl p-4 shadow-sm border border-gray-100">
+      <div class="flex items-center justify-between mb-3">
+        <h3 class="text-sm font-bold text-gray-900 flex items-center gap-2">
+          <i data-lucide="calendar" class="w-4 h-4 text-emerald-700"></i>
+          Jadwal Latihan Terdekat
+        </h3>
+        <span class="text-[11px] text-emerald-800 font-semibold bg-emerald-50 px-2 py-0.5 rounded-full">Minggu Ini</span>
+      </div>
+
+      <div class="bg-gray-50 rounded-xl p-3 border border-gray-200/60 flex items-center justify-between">
+        <div class="space-y-1">
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-bold text-gray-900">KU-10 & KU-12</span>
+            <span class="text-[10px] bg-emerald-700 text-white font-bold px-1.5 py-0.2 rounded">Rutin</span>
+          </div>
+          <p class="text-xs text-gray-600 flex items-center gap-1">
+            <i data-lucide="clock" class="w-3.5 h-3.5 text-gray-400"></i> Minggu, 15:30 - 17:30 WIB
+          </p>
+          <p class="text-xs text-gray-600 flex items-center gap-1">
+            <i data-lucide="map-pin" class="w-3.5 h-3.5 text-gray-400"></i> Lapangan Wira Mekar Utama
+          </p>
+        </div>
+        <button class="bg-[#0e3d22] text-white text-xs font-semibold px-3 py-1.5 rounded-lg active:scale-95 transition shadow-sm">
+          Detail
+        </button>
+      </div>
+    </div>
+
+    <!-- PENGUMUMAN SSB -->
+    <div class="bg-white rounded-2xl p-4 shadow-sm border border-gray-100">
+      <h3 class="text-sm font-bold text-gray-900 flex items-center gap-2 mb-3">
+        <i data-lucide="megaphone" class="w-4 h-4 text-amber-600"></i>
+        Pengumuman Terbaru
+      </h3>
+      <div class="p-3 bg-amber-50/70 rounded-xl border border-amber-200/60">
+        <p class="text-xs font-bold text-amber-950">Pembayaran Iuran & Registrasi Ulang</p>
+        <p class="text-[11px] text-amber-800 mt-1 leading-relaxed">
+          Mohon kepada seluruh orang tua siswa untuk memeriksa status administrasi bulanan sebelum tanggal 10 setiap bulannya.
+        </p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- BOTTOM NAVIGATION BAR (KHUSUS LAYAR HP) -->
+  <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-2xl z-40 max-w-md mx-auto">
+    <div class="grid grid-cols-5 py-2">
+      <button class="flex flex-col items-center justify-center text-[#0e3d22] font-bold">
+        <i data-lucide="home" class="w-5 h-5"></i>
+        <span class="text-[10px] mt-1">Beranda</span>
+      </button>
+      <button class="flex flex-col items-center justify-center text-gray-400 hover:text-[#0e3d22]">
+        <i data-lucide="users" class="w-5 h-5"></i>
+        <span class="text-[10px] mt-1">Atlet</span>
+      </button>
+      <button class="flex flex-col items-center justify-center text-gray-400 hover:text-[#0e3d22]">
+        <i data-lucide="clipboard-check" class="w-5 h-5"></i>
+        <span class="text-[10px] mt-1">Absensi</span>
+      </button>
+      <button class="flex flex-col items-center justify-center text-gray-400 hover:text-[#0e3d22]">
+        <i data-lucide="trophy" class="w-5 h-5"></i>
+        <span class="text-[10px] mt-1">Turnamen</span>
+      </button>
+      <button class="flex flex-col items-center justify-center text-gray-400 hover:text-[#0e3d22]">
+        <i data-lucide="user" class="w-5 h-5"></i>
+        <span class="text-[10px] mt-1">Akun</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Script Lucide Icons -->
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>WMU Academy — SSB Wira Mekar Utama</title>
+  
+  <!-- Tailwind CSS & Lucide Icons -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['"Plus Jakarta Sans"', 'sans-serif'] },
+          colors: {
+            wmu: {
+              green: '#0e3d22',
+              darkgreen: '#072413',
+              lightgreen: '#1a5c36',
+              gold: '#D4AF37',
+              goldlight: '#FFF9E6'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #F8FAF9; }
+    .gold-gradient { background: linear-gradient(135deg, #DFBA49 0%, #B89220 100%); }
+    .green-gradient { background: linear-gradient(135deg, #0e3d22 0%, #072413 100%); }
+  </style>
+</head>
+<body class="text-gray-800 pb-28 antialiased selection:bg-yellow-500 selection:text-white">
+
+  <!-- TOP HEADER -->
+  <header class="green-gradient text-white sticky top-0 z-30 shadow-md border-b-2 border-yellow-500">
+    <div class="max-w-md mx-auto px-4 py-3.5 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-full gold-gradient flex items-center justify-center text-white font-black text-xl shadow-md border border-white">
+          W
+        </div>
+        <div>
+          <h1 class="font-extrabold text-base tracking-wide flex items-center gap-1.5 leading-tight">
+            WMU ACADEMY
+            <span class="text-[10px] bg-yellow-400 text-gray-900 font-extrabold px-1.5 py-0.5 rounded shadow-sm">SSB</span>
+          </h1>
+          <p class="text-[11px] text-gray-300 font-medium tracking-wide">Wira Mekar Utama</p>
+        </div>
+      </div>
+      <button class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center border border-white/20 active:scale-95 transition">
+        <i data-lucide="bell" class="w-4 h-4 text-yellow-300"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- KONTEN UTAMA DASHBOARD -->
+  <main class="max-w-md mx-auto px-4 pt-4 space-y-4">
+
+    <!-- KARTU SAMBUTAN -->
+    <div class="green-gradient rounded-2xl p-4 text-white shadow-lg relative overflow-hidden border border-yellow-500/30">
+      <div class="flex items-center justify-between">
+        <div>
+          <span class="text-[10px] uppercase tracking-wider text-yellow-300 font-bold bg-yellow-400/20 px-2 py-0.5 rounded border border-yellow-400/30">Portal Resmi</span>
+          <h2 class="text-base font-bold mt-1 text-white">Halo, Manajemen SSB</h2>
+          <p class="text-xs text-gray-200 mt-0.5">Sistem Pembinaan Atlet Usia Dini</p>
+        </div>
+        <div class="text-right">
+          <span class="inline-block text-[10px] font-bold px-2 py-1 bg-yellow-500 text-gray-950 rounded-lg shadow-sm">
+            AKTIF
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- STATISTIK RINGKAS -->
+    <div class="grid grid-cols-2 gap-3">
+      <div class="bg-white p-3.5 rounded-2xl shadow-sm border border-gray-100 flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center">
+          <i data-lucide="users" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <p class="text-[11px] text-gray-500 font-medium">Total Atlet</p>
+          <p class="text-base font-bold text-gray-900 leading-tight">64 Siswa</p>
+        </div>
+      </div>
+
+      <div class="bg-white p-3.5 rounded-2xl shadow-sm border border-gray-100 flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center">
+          <i data-lucide="trophy" class="w-5 h-5"></i>
+        </div>
+        <div>
+          <p class="text-[11px] text-gray-500 font-medium">Turnamen</p>
+          <p class="text-base font-bold text-gray-900 leading-tight">3 Agenda</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- JADWAL LATIHAN TERDEKAT -->
+    <div class="bg-white rounded-2xl p-4 shadow-sm border border-gray-100">
+      <div class="flex items-center justify-between mb-3">
+        <h3 class="text-sm font-bold text-gray-900 flex items-center gap-2">
+          <i data-lucide="calendar" class="w-4 h-4 text-emerald-700"></i>
+          Jadwal Latihan Terdekat
+        </h3>
+        <span class="text-[11px] text-emerald-800 font-semibold bg-emerald-50 px-2 py-0.5 rounded-full">Minggu Ini</span>
+      </div>
+
+      <div class="bg-gray-50 rounded-xl p-3 border border-gray-200/60 flex items-center justify-between">
+        <div class="space-y-1">
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-bold text-gray-900">KU-10 & KU-12</span>
+            <span class="text-[10px] bg-emerald-700 text-white font-bold px-1.5 py-0.2 rounded">Rutin</span>
+          </div>
+          <p class="text-xs text-gray-600 flex items-center gap-1">
+            <i data-lucide="clock" class="w-3.5 h-3.5 text-gray-400"></i> Minggu, 15:30 - 17:30 WIB
+          </p>
+          <p class="text-xs text-gray-600 flex items-center gap-1">
+            <i data-lucide="map-pin" class="w-3.5 h-3.5 text-gray-400"></i> Lapangan Wira Mekar Utama
+          </p>
+        </div>
+        <button class="bg-[#0e3d22] text-white text-xs font-semibold px-3 py-1.5 rounded-lg active:scale-95 transition shadow-sm">
+          Detail
+        </button>
+      </div>
+    </div>
+
+    <!-- PENGUMUMAN SSB -->
+    <div class="bg-white rounded-2xl p-4 shadow-sm border border-gray-100">
+      <h3 class="text-sm font-bold text-gray-900 flex items-center gap-2 mb-3">
+        <i data-lucide="megaphone" class="w-4 h-4 text-amber-600"></i>
+        Pengumuman Terbaru
+      </h3>
+      <div class="p-3 bg-amber-50/70 rounded-xl border border-amber-200/60">
+        <p class="text-xs font-bold text-amber-950">Pembayaran Iuran & Registrasi Ulang</p>
+        <p class="text-[11px] text-amber-800 mt-1 leading-relaxed">
+          Mohon kepada seluruh orang tua siswa untuk memeriksa status administrasi bulanan sebelum tanggal 10 setiap bulannya.
+        </p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- BOTTOM NAVIGATION BAR (KHUSUS LAYAR HP) -->
+  <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-2xl z-40 max-w-md mx-auto">
+    <div class="grid grid-cols-5 py-2">
+      <button class="flex flex-col items-center justify-center text-[#0e3d22] font-bold">
+        <i data-lucide="home" class="w-5 h-5"></i>
+        <span class="text-[10px] mt-1">Beranda</span>
+      </button>
+      <button class="flex flex-col items-center justify-center text-gray-400 hover:text-[#0e3d22]">
+        <i data-lucide="users" class="w-5 h-5"></i>
+        <span class="text-[10px] mt-1">Atlet</span>
+      </button>
+      <button class="flex flex-col items-center justify-center text-gray-400 hover:text-[#0e3d22]">
+        <i data-lucide="clipboard-check" class="w-5 h-5"></i>
+        <span class="text-[10px] mt-1">Absensi</span>
+      </button>
+      <button class="flex flex-col items-center justify-center text-gray-400 hover:text-[#0e3d22]">
+        <i data-lucide="trophy" class="w-5 h-5"></i>
+        <span class="text-[10px] mt-1">Turnamen</span>
+      </button>
+      <button class="flex flex-col items-center justify-center text-gray-400 hover:text-[#0e3d22]">
+        <i data-lucide="user" class="w-5 h-5"></i>
+        <span class="text-[10px] mt-1">Akun</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Script Lucide Icons -->
+  <script>
+    lucide.createIcons();
+  </script>
+</body>
+</html>
