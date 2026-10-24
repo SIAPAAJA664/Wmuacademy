@@ -38,8 +38,8 @@
 </head>
 <body class="text-gray-800 pb-28 antialiased selection:bg-yellow-500 selection:text-white">
 
-  <!-- ==================== MODAL LOGIN ==================== -->
-  <div id="login-modal" class="fixed inset-0 z-50 bg-[#072413] flex flex-col justify-center px-4 py-6 transition-all duration-300">
+  <!-- ==================== MODAL LOGIN (DENGAN FIX KLIK) ==================== -->
+  <div id="login-modal" class="fixed inset-0 z-50 bg-[#072413] flex flex-col justify-center px-4 py-6" style="display: flex;">
     <div class="max-w-md w-full mx-auto space-y-6">
       <div class="text-center space-y-1">
         <div class="w-16 h-16 mx-auto rounded-2xl gold-gradient flex items-center justify-center text-white font-black text-3xl shadow-xl border border-white">
@@ -52,29 +52,36 @@
       <div class="bg-white rounded-3xl p-5 shadow-2xl space-y-4">
         <div>
           <h2 class="text-base font-bold text-gray-900">Masuk Portal SSB</h2>
-          <p class="text-xs text-gray-500">Pilih peran akun untuk pengujian:</p>
+          <p class="text-xs text-gray-500">Sentuh salah satu akun di bawah untuk masuk:</p>
         </div>
 
         <div class="grid grid-cols-2 gap-2.5 text-xs">
-          <button onclick="quickLogin('admin')" class="p-3 rounded-xl bg-emerald-50 text-emerald-900 font-bold border-2 border-emerald-300 active:scale-95 text-center flex flex-col items-center gap-1 shadow-sm">
-            <span class="text-xl">🛡️</span>
-            <span>Admin SSB</span>
-            <span class="text-[9px] text-emerald-600 font-normal">Akses Penuh Kelola</span>
+          <!-- Tombol Admin -->
+          <button type="button" onclick="loginSebagai('admin')" class="p-3 rounded-xl bg-emerald-50 text-emerald-950 font-bold border-2 border-emerald-400 active:scale-95 text-center flex flex-col items-center gap-1 shadow-sm cursor-pointer">
+            <span class="text-2xl">🛡️</span>
+            <span class="font-black text-xs text-[#0e3d22]">Admin SSB</span>
+            <span class="text-[9px] text-emerald-700">Akses Penuh Kelola</span>
           </button>
-          <button onclick="quickLogin('pelatih')" class="p-3 rounded-xl bg-blue-50 text-blue-900 font-bold border border-blue-200 active:scale-95 text-center flex flex-col items-center gap-1">
-            <span class="text-xl">📋</span>
-            <span>Pelatih</span>
-            <span class="text-[9px] text-blue-600 font-normal">Materi & Absensi</span>
+
+          <!-- Tombol Pelatih -->
+          <button type="button" onclick="loginSebagai('pelatih')" class="p-3 rounded-xl bg-blue-50 text-blue-950 font-bold border-2 border-blue-400 active:scale-95 text-center flex flex-col items-center gap-1 shadow-sm cursor-pointer">
+            <span class="text-2xl">📋</span>
+            <span class="font-black text-xs text-blue-900">Pelatih</span>
+            <span class="text-[9px] text-blue-700">Materi & Absensi</span>
           </button>
-          <button onclick="quickLogin('atlet')" class="p-3 rounded-xl bg-amber-50 text-amber-900 font-bold border border-amber-200 active:scale-95 text-center flex flex-col items-center gap-1">
-            <span class="text-xl">⚽</span>
-            <span>Atlet Siswa</span>
-            <span class="text-[9px] text-amber-600 font-normal">Jadwal & Profil</span>
+
+          <!-- Tombol Atlet -->
+          <button type="button" onclick="loginSebagai('atlet')" class="p-3 rounded-xl bg-amber-50 text-amber-950 font-bold border border-amber-300 active:scale-95 text-center flex flex-col items-center gap-1 cursor-pointer">
+            <span class="text-2xl">⚽</span>
+            <span class="font-black text-xs text-amber-900">Atlet Siswa</span>
+            <span class="text-[9px] text-amber-700">Jadwal & Profil</span>
           </button>
-          <button onclick="quickLogin('orangtua')" class="p-3 rounded-xl bg-purple-50 text-purple-900 font-bold border border-purple-200 active:scale-95 text-center flex flex-col items-center gap-1">
-            <span class="text-xl">👨‍👩‍👦</span>
-            <span>Orang Tua</span>
-            <span class="text-[9px] text-purple-600 font-normal">Tagihan & Evaluasi</span>
+
+          <!-- Tombol Orang Tua -->
+          <button type="button" onclick="loginSebagai('orangtua')" class="p-3 rounded-xl bg-purple-50 text-purple-950 font-bold border border-purple-300 active:scale-95 text-center flex flex-col items-center gap-1 cursor-pointer">
+            <span class="text-2xl">👨‍👩‍👦</span>
+            <span class="font-black text-xs text-purple-900">Orang Tua</span>
+            <span class="text-[9px] text-purple-700">Tagihan & Raport</span>
           </button>
         </div>
       </div>
@@ -98,7 +105,7 @@
         <span id="badge-role-pill" class="text-[10px] bg-yellow-400 text-gray-950 font-bold px-2 py-0.5 rounded-full uppercase">
           ADMIN
         </span>
-        <button onclick="logout()" class="p-1.5 rounded-lg bg-red-600/80 text-white text-xs active:scale-95 transition" title="Ganti Akun">
+        <button type="button" onclick="bukaLayarLogin()" class="p-1.5 rounded-lg bg-red-600 text-white text-xs active:scale-95 transition" title="Ganti Akun">
           <i data-lucide="log-out" class="w-4 h-4"></i>
         </button>
       </div>
@@ -108,7 +115,7 @@
   <!-- ==================== KONTEN UTAMA ==================== -->
   <main class="max-w-md mx-auto px-4 pt-3 space-y-4">
 
-    <!-- ================= 1. TAB BERANDA / DASHBOARD ================= -->
+    <!-- ================= TAB 1: BERANDA ================= -->
     <div id="view-dashboard" class="space-y-4">
       <div class="green-gradient rounded-2xl p-4 text-white shadow-md relative overflow-hidden border border-yellow-500/30">
         <div class="flex items-center justify-between">
@@ -125,9 +132,9 @@
         </div>
       </div>
 
-      <!-- Tombol Cepat Tambah Siswa -->
+      <!-- Tombol Pendaftaran Siswa (Khusus Admin) -->
       <div id="admin-quick-add-container">
-        <button onclick="openModalTambahAtlet()" class="w-full py-3 px-4 bg-[#0e3d22] border-2 border-yellow-500 text-white rounded-2xl font-bold text-xs flex items-center justify-between shadow-md active:scale-98 transition">
+        <button type="button" onclick="openModalTambahAtlet()" class="w-full py-3 px-4 bg-[#0e3d22] border-2 border-yellow-500 text-white rounded-2xl font-bold text-xs flex items-center justify-between shadow-md active:scale-98 transition">
           <div class="flex items-center gap-2.5">
             <div class="w-7 h-7 rounded-lg bg-yellow-400 text-gray-950 flex items-center justify-center font-black">
               +
@@ -141,7 +148,7 @@
         </button>
       </div>
 
-      <!-- Statistik Ringkas -->
+      <!-- Ringkasan Statistik -->
       <div class="grid grid-cols-2 gap-3">
         <div onclick="switchTab('atlet')" class="bg-white p-3.5 rounded-2xl shadow-sm border border-gray-100 flex items-center space-x-3 cursor-pointer active:scale-95 transition">
           <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center">
@@ -170,7 +177,7 @@
           <h3 class="text-xs font-bold text-gray-900 flex items-center gap-1.5">
             <i data-lucide="calendar" class="w-4 h-4 text-emerald-700"></i> Sesi Latihan Berikutnya
           </h3>
-          <button onclick="switchTab('absensi'); switchSubTab('jadwal');" class="text-[10px] font-bold text-emerald-700 hover:underline">Lihat Semua</button>
+          <button type="button" onclick="switchTab('absensi'); switchSubTab('jadwal');" class="text-[10px] font-bold text-emerald-700 hover:underline">Lihat Semua</button>
         </div>
         <div id="dashboard-next-schedule" class="bg-gray-50 p-3 rounded-xl border border-gray-100 space-y-1">
           <!-- Disuntikkan JS -->
@@ -178,24 +185,24 @@
       </div>
     </div>
 
-    <!-- ================= 2. TAB ATLET ================= -->
-    <div id="view-atlet" class="hidden space-y-3">
+    <!-- ================= TAB 2: ATLET ================= -->
+    <div id="view-atlet" style="display: none;" class="space-y-3">
       <div class="flex items-center gap-2">
         <div class="relative flex-1">
           <i data-lucide="search" class="w-4 h-4 absolute left-3 top-3 text-gray-400"></i>
           <input type="text" id="search-atlet" oninput="filterAtlet()" placeholder="Cari nama atau posisi atlet..." class="w-full text-xs pl-9 pr-3 py-2.5 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#0e3d22]">
         </div>
-        <button id="btn-tambah-atlet-tab" onclick="openModalTambahAtlet()" class="bg-[#0e3d22] text-white px-3 py-2.5 rounded-xl text-xs font-bold flex items-center gap-1.5 active:scale-95 shadow border border-yellow-500">
+        <button type="button" id="btn-tambah-atlet-tab" onclick="openModalTambahAtlet()" class="bg-[#0e3d22] text-white px-3 py-2.5 rounded-xl text-xs font-bold flex items-center gap-1.5 active:scale-95 shadow border border-yellow-500">
           <i data-lucide="user-plus" class="w-4 h-4 text-yellow-400"></i>
           <span>+ Tambah</span>
         </button>
       </div>
 
       <div class="flex gap-2 overflow-x-auto pb-1 hide-scrollbar text-xs">
-        <button onclick="filterKU('SEMUA')" class="filter-ku-btn bg-[#0e3d22] text-white font-bold px-3 py-1.5 rounded-lg whitespace-nowrap">Semua KU</button>
-        <button onclick="filterKU('KU-10')" class="filter-ku-btn bg-white text-gray-600 font-semibold px-3 py-1.5 rounded-lg border border-gray-200 whitespace-nowrap">KU-10</button>
-        <button onclick="filterKU('KU-12')" class="filter-ku-btn bg-white text-gray-600 font-semibold px-3 py-1.5 rounded-lg border border-gray-200 whitespace-nowrap">KU-12</button>
-        <button onclick="filterKU('KU-14')" class="filter-ku-btn bg-white text-gray-600 font-semibold px-3 py-1.5 rounded-lg border border-gray-200 whitespace-nowrap">KU-14</button>
+        <button type="button" onclick="filterKU('SEMUA')" class="filter-ku-btn bg-[#0e3d22] text-white font-bold px-3 py-1.5 rounded-lg whitespace-nowrap">Semua KU</button>
+        <button type="button" onclick="filterKU('KU-10')" class="filter-ku-btn bg-white text-gray-600 font-semibold px-3 py-1.5 rounded-lg border border-gray-200 whitespace-nowrap">KU-10</button>
+        <button type="button" onclick="filterKU('KU-12')" class="filter-ku-btn bg-white text-gray-600 font-semibold px-3 py-1.5 rounded-lg border border-gray-200 whitespace-nowrap">KU-12</button>
+        <button type="button" onclick="filterKU('KU-14')" class="filter-ku-btn bg-white text-gray-600 font-semibold px-3 py-1.5 rounded-lg border border-gray-200 whitespace-nowrap">KU-14</button>
       </div>
 
       <div id="list-atlet" class="space-y-2.5">
@@ -203,462 +210,17 @@
       </div>
     </div>
 
-    <!-- ================= 3. TAB ABSENSI, JADWAL & MATERI ================= -->
-    <div id="view-absensi" class="hidden space-y-4">
+    <!-- ================= TAB 3: ABSENSI, JADWAL & MATERI ================= -->
+    <div id="view-absensi" style="display: none;" class="space-y-4">
       
-      <!-- Sub-Tab Navigasi di Bagian Atas -->
       <div class="grid grid-cols-3 bg-gray-200 p-1 rounded-xl text-xs font-bold text-gray-600">
-        <button onclick="switchSubTab('absensi')" id="subtab-btn-absensi" class="py-2 rounded-lg bg-white text-[#0e3d22] shadow-sm">Presensi</button>
-        <button onclick="switchSubTab('jadwal')" id="subtab-btn-jadwal" class="py-2 rounded-lg">Jadwal</button>
-        <button onclick="switchSubTab('materi')" id="subtab-btn-materi" class="py-2 rounded-lg">Materi Drill</button>
+        <button type="button" onclick="switchSubTab('absensi')" id="subtab-btn-absensi" class="py-2 rounded-lg bg-white text-[#0e3d22] shadow-sm">Presensi</button>
+        <button type="button" onclick="switchSubTab('jadwal')" id="subtab-btn-jadwal" class="py-2 rounded-lg">Jadwal</button>
+        <button type="button" onclick="switchSubTab('materi')" id="subtab-btn-materi" class="py-2 rounded-lg">Materi Drill</button>
       </div>
 
-      <!-- Sub-Layar A: Form Presensi Siswa -->
+      <!-- Presensi -->
       <div id="subview-absensi" class="space-y-3">
         <div class="bg-white p-3.5 rounded-2xl border border-gray-100 flex items-center justify-between">
           <div>
-            <h3 class="text-xs font-bold text-gray-900">Sesi Latihan Aktif</h3>
-            <p class="text-[11px] text-gray-500" id="absensi-active-session">Minggu Ini • Semua KU</p>
-          </div>
-          <span class="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full">Sesi Berjalan</span>
-        </div>
-
-        <div class="bg-yellow-50 p-2.5 rounded-xl border border-yellow-200 text-[11px] text-yellow-900">
-          💡 <strong>Petunjuk Pelatih:</strong> Sentuh tombol status di bawah nama siswa: <strong>H</strong> (Hadir), <strong>I</strong> (Izin), <strong>S</strong> (Sakit), <strong>A</strong> (Alpa).
-        </div>
-
-        <!-- Daftar Atlet untuk diabsen -->
-        <div id="list-absensi-atlet" class="space-y-2.5">
-          <!-- Disuntikkan JS -->
-        </div>
-
-        <button onclick="simpanAbsensi()" class="w-full py-3 bg-[#0e3d22] text-white text-xs font-bold rounded-xl shadow-md active:scale-95 flex items-center justify-center gap-1.5">
-          <i data-lucide="check-circle" class="w-4 h-4 text-yellow-400"></i> Simpan Rekap Kehadiran
-        </button>
-      </div>
-
-      <!-- Sub-Layar B: Jadwal Latihan -->
-      <div id="subview-jadwal" class="hidden space-y-3">
-        <div class="flex justify-between items-center">
-          <h3 class="text-xs font-bold text-gray-900">Agenda Latihan Rutin SSB</h3>
-          <button id="btn-tambah-jadwal" onclick="openModalTambahJadwal()" class="bg-[#0e3d22] text-white px-2.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1 border border-yellow-500 shadow-sm">
-            <i data-lucide="plus" class="w-3.5 h-3.5"></i> Tambah Jadwal
-          </button>
-        </div>
-
-        <div id="list-jadwal" class="space-y-2.5">
-          <!-- Disuntikkan JS -->
-        </div>
-      </div>
-
-      <!-- Sub-Layar C: Perpustakaan Materi Latihan -->
-      <div id="subview-materi" class="hidden space-y-3">
-        <div class="flex justify-between items-center">
-          <h3 class="text-xs font-bold text-gray-900">Kurikulum & Materi Drill WMU</h3>
-          <span class="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full">Standar SSB</span>
-        </div>
-
-        <div id="list-materi" class="space-y-3">
-          <!-- Disuntikkan JS -->
-        </div>
-      </div>
-
-    </div>
-
-    <!-- ================= 4. TAB TURNAMEN & AKUN (PLACEHOLDER TAHAP 6 & 7) ================= -->
-    <div id="view-placeholder" class="hidden p-8 text-center bg-white rounded-2xl border border-gray-100 space-y-2">
-      <div class="w-12 h-12 mx-auto rounded-full bg-emerald-50 text-emerald-700 flex items-center justify-center">
-        <i data-lucide="trophy" class="w-6 h-6"></i>
-      </div>
-      <h3 id="placeholder-title" class="text-sm font-bold text-gray-800">Menu Turnamen & Evaluasi</h3>
-      <p class="text-xs text-gray-500">Fitur ini siap diaktifkan pada Tahap 6 selanjutnya.</p>
-    </div>
-
-  </main>
-
-  <!-- ==================== MODAL TAMBAH JADWAL ==================== -->
-  <div id="modal-tambah-jadwal" class="hidden fixed inset-0 z-50 bg-black/70 flex items-end sm:items-center justify-center p-0 sm:p-4">
-    <div class="bg-white rounded-t-3xl sm:rounded-2xl max-w-md w-full p-5 space-y-4">
-      <div class="flex justify-between items-center border-b pb-3">
-        <h3 class="text-sm font-bold text-gray-900">Tambah Jadwal Latihan</h3>
-        <button onclick="closeModalTambahJadwal()" class="text-gray-400 hover:text-gray-700">
-          <i data-lucide="x" class="w-5 h-5"></i>
-        </button>
-      </div>
-
-      <form onsubmit="handleFormTambahJadwal(event)" class="space-y-3 text-xs">
-        <div>
-          <label class="block font-bold text-gray-700 mb-1">Fokus / Topik Latihan</label>
-          <input type="text" id="jadwal-fokus" required placeholder="Contoh: Drill Passing & Shooting" class="w-full p-2.5 border rounded-xl">
-        </div>
-        <div class="grid grid-cols-2 gap-2">
-          <div>
-            <label class="block font-bold text-gray-700 mb-1">Hari & Tanggal</label>
-            <input type="text" id="jadwal-hari" required placeholder="Minggu, 1 Nov" class="w-full p-2.5 border rounded-xl">
-          </div>
-          <div>
-            <label class="block font-bold text-gray-700 mb-1">Waktu</label>
-            <input type="text" id="jadwal-waktu" required placeholder="15:30 - 17:30" class="w-full p-2.5 border rounded-xl">
-          </div>
-        </div>
-        <div class="grid grid-cols-2 gap-2">
-          <div>
-            <label class="block font-bold text-gray-700 mb-1">Kelompok Umur</label>
-            <select id="jadwal-ku" class="w-full p-2.5 border rounded-xl bg-white">
-              <option value="KU-10 & KU-12">KU-10 & KU-12</option>
-              <option value="KU-12 & KU-14">KU-12 & KU-14</option>
-              <option value="Semua KU">Semua KU</option>
-            </select>
-          </div>
-          <div>
-            <label class="block font-bold text-gray-700 mb-1">Lokasi Latihan</label>
-            <input type="text" id="jadwal-lokasi" required placeholder="Lapangan WMU Utama" class="w-full p-2.5 border rounded-xl">
-          </div>
-        </div>
-
-        <div class="pt-2 flex gap-2">
-          <button type="button" onclick="closeModalTambahJadwal()" class="w-1/2 py-2.5 bg-gray-100 text-gray-700 font-bold rounded-xl">Batal</button>
-          <button type="submit" class="w-1/2 py-2.5 bg-[#0e3d22] text-white font-bold rounded-xl shadow">Simpan Jadwal</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- ==================== MODAL TAMBAH ATLET ==================== -->
-  <div id="modal-tambah-atlet" class="hidden fixed inset-0 z-50 bg-black/70 flex items-end sm:items-center justify-center p-0 sm:p-4">
-    <div class="bg-white rounded-t-3xl sm:rounded-2xl max-w-md w-full max-h-[92vh] overflow-y-auto p-5 space-y-4">
-      <div class="flex justify-between items-center border-b pb-3">
-        <h3 class="text-sm font-bold text-gray-900 flex items-center gap-1.5">
-          <i data-lucide="user-plus" class="w-4 h-4 text-emerald-700"></i> Pendaftaran Atlet Baru
-        </h3>
-        <button onclick="closeModalTambahAtlet()" class="text-gray-400 hover:text-gray-700">
-          <i data-lucide="x" class="w-5 h-5"></i>
-        </button>
-      </div>
-
-      <form onsubmit="handleFormTambahAtlet(event)" class="space-y-3 text-xs">
-        <div>
-          <label class="block font-bold text-gray-700 mb-1">Nama Lengkap Atlet *</label>
-          <input type="text" id="input-nama" required placeholder="Contoh: Rian Pratama" class="w-full p-2.5 border rounded-xl focus:ring-2 focus:ring-[#0e3d22]">
-        </div>
-
-        <div class="grid grid-cols-2 gap-2">
-          <div>
-            <label class="block font-bold text-gray-700 mb-1">Nomor Induk (NIA) *</label>
-            <input type="text" id="input-nia" required placeholder="WMU-2026-005" class="w-full p-2.5 border rounded-xl">
-          </div>
-          <div>
-            <label class="block font-bold text-gray-700 mb-1">No. Punggung *</label>
-            <input type="number" id="input-nomor" required placeholder="10" class="w-full p-2.5 border rounded-xl">
-          </div>
-        </div>
-
-        <div class="grid grid-cols-2 gap-2">
-          <div>
-            <label class="block font-bold text-gray-700 mb-1">Kelompok Umur *</label>
-            <select id="input-ku" class="w-full p-2.5 border rounded-xl bg-white">
-              <option value="KU-10">KU-10</option>
-              <option value="KU-12">KU-12</option>
-              <option value="KU-14">KU-14</option>
-            </select>
-          </div>
-          <div>
-            <label class="block font-bold text-gray-700 mb-1">Posisi Bermain *</label>
-            <select id="input-posisi" class="w-full p-2.5 border rounded-xl bg-white">
-              <option value="Striker">Striker (FW)</option>
-              <option value="Gelandang">Gelandang (MF)</option>
-              <option value="Bek">Bek (DF)</option>
-              <option value="Kiper">Kiper (GK)</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-2 gap-2">
-          <div>
-            <label class="block font-bold text-gray-700 mb-1">Tempat Lahir</label>
-            <input type="text" id="input-tempat-lahir" placeholder="Jakarta" class="w-full p-2.5 border rounded-xl">
-          </div>
-          <div>
-            <label class="block font-bold text-gray-700 mb-1">Tanggal Lahir</label>
-            <input type="date" id="input-tgl-lahir" class="w-full p-2.5 border rounded-xl">
-          </div>
-        </div>
-
-        <div>
-          <label class="block font-bold text-gray-700 mb-1">Nama Orang Tua / Wali *</label>
-          <input type="text" id="input-ortu" required placeholder="Nama Ayah / Ibu" class="w-full p-2.5 border rounded-xl">
-        </div>
-
-        <div>
-          <label class="block font-bold text-gray-700 mb-1">No. WhatsApp Orang Tua *</label>
-          <input type="tel" id="input-wa" required placeholder="081234567890" class="w-full p-2.5 border rounded-xl">
-        </div>
-
-        <div class="pt-2 flex gap-2">
-          <button type="button" onclick="closeModalTambahAtlet()" class="w-1/2 py-2.5 bg-gray-100 text-gray-700 font-bold rounded-xl active:scale-95">Batal</button>
-          <button type="submit" class="w-1/2 py-2.5 bg-[#0e3d22] text-white font-bold rounded-xl active:scale-95 shadow">Simpan Atlet</button>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- ==================== MODAL RINCIAN PROFIL ATLET ==================== -->
-  <div id="modal-detail-atlet" class="hidden fixed inset-0 z-50 bg-black/60 flex items-end sm:items-center justify-center p-0 sm:p-4">
-    <div class="bg-white rounded-t-3xl sm:rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto p-5 space-y-4">
-      <div class="flex justify-between items-center border-b pb-3">
-        <h3 class="text-sm font-bold text-gray-900">Profil Lengkap Atlet</h3>
-        <button onclick="closeModalDetailAtlet()" class="text-gray-400 hover:text-gray-700">
-          <i data-lucide="x" class="w-5 h-5"></i>
-        </button>
-      </div>
-
-      <div id="detail-atlet-content" class="space-y-4 text-xs">
-        <!-- Disuntikkan JS -->
-      </div>
-    </div>
-  </div>
-
-  <!-- ==================== MODAL DETAIL MATERI LATIHAN ==================== -->
-  <div id="modal-detail-materi" class="hidden fixed inset-0 z-50 bg-black/60 flex items-end sm:items-center justify-center p-0 sm:p-4">
-    <div class="bg-white rounded-t-3xl sm:rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto p-5 space-y-4">
-      <div class="flex justify-between items-center border-b pb-3">
-        <h3 class="text-sm font-bold text-gray-900">Panduan Modul Latihan</h3>
-        <button onclick="closeModalDetailMateri()" class="text-gray-400 hover:text-gray-700">
-          <i data-lucide="x" class="w-5 h-5"></i>
-        </button>
-      </div>
-
-      <div id="detail-materi-content" class="space-y-3 text-xs">
-        <!-- Disuntikkan JS -->
-      </div>
-    </div>
-  </div>
-
-  <!-- ==================== BOTTOM NAVIGATION (TAB LAYAR HP) ==================== -->
-  <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-2xl z-40 max-w-md mx-auto">
-    <div class="grid grid-cols-5 py-2">
-      <button onclick="switchTab('dashboard')" id="nav-btn-dashboard" class="flex flex-col items-center justify-center text-[#0e3d22] font-bold">
-        <i data-lucide="home" class="w-5 h-5"></i>
-        <span class="text-[10px] mt-1">Beranda</span>
-      </button>
-      <button onclick="switchTab('atlet')" id="nav-btn-atlet" class="flex flex-col items-center justify-center text-gray-400">
-        <i data-lucide="users" class="w-5 h-5"></i>
-        <span class="text-[10px] mt-1">Atlet</span>
-      </button>
-      <button onclick="switchTab('absensi')" id="nav-btn-absensi" class="flex flex-col items-center justify-center text-gray-400">
-        <i data-lucide="clipboard-check" class="w-5 h-5"></i>
-        <span class="text-[10px] mt-1">Absen/Drill</span>
-      </button>
-      <button onclick="switchTab('turnamen')" id="nav-btn-turnamen" class="flex flex-col items-center justify-center text-gray-400">
-        <i data-lucide="trophy" class="w-5 h-5"></i>
-        <span class="text-[10px] mt-1">Turnamen</span>
-      </button>
-      <button onclick="switchTab('akun')" id="nav-btn-akun" class="flex flex-col items-center justify-center text-gray-400">
-        <i data-lucide="user" class="w-5 h-5"></i>
-        <span class="text-[10px] mt-1">Akun</span>
-      </button>
-    </div>
-  </nav>
-
-  <!-- ==================== LOGIKA JAVASCRIPT LENGKAP ==================== -->
-  <script>
-    // 1. DATA ATLET
-    let dataAtlet = [
-      {
-        id: 1,
-        nama: "Rian Pratama",
-        nia: "WMU-2026-001",
-        noPunggung: 10,
-        ku: "KU-12",
-        posisi: "Striker",
-        ttl: "Jakarta, 12 Mei 2014",
-        usia: "12 Tahun",
-        ortu: "Herman Pratama",
-        wa: "081234567801",
-        tglGabung: "10 Januari 2025",
-        kehadiran: "95%",
-        statusIuran: "Lunas",
-        catatan: "Penyelesaian akhir sangat tajam, tingkatkan stamina babak kedua.",
-        statusHariIni: "H"
-      },
-      {
-        id: 2,
-        nama: "Fajar Maulana",
-        nia: "WMU-2026-002",
-        noPunggung: 7,
-        ku: "KU-12",
-        posisi: "Gelandang",
-        ttl: "Bekasi, 18 Agustus 2014",
-        usia: "12 Tahun",
-        ortu: "Dedi Maulana",
-        wa: "081234567802",
-        tglGabung: "15 Januari 2025",
-        kehadiran: "90%",
-        statusIuran: "Lunas",
-        catatan: "Umpan akurat dan visi bermain sangat baik.",
-        statusHariIni: "H"
-      },
-      {
-        id: 3,
-        nama: "Bagas Satria",
-        nia: "WMU-2026-003",
-        noPunggung: 4,
-        ku: "KU-10",
-        posisi: "Bek",
-        ttl: "Depok, 22 April 2016",
-        usia: "10 Tahun",
-        ortu: "Agus Satria",
-        wa: "081234567803",
-        tglGabung: "01 Februari 2025",
-        kehadiran: "88%",
-        statusIuran: "Menunggu",
-        catatan: "Disiplin menjaga area pertahanan, tekel bersih.",
-        statusHariIni: "I"
-      },
-      {
-        id: 4,
-        nama: "Dimas Anggara",
-        nia: "WMU-2026-004",
-        noPunggung: 1,
-        ku: "KU-14",
-        posisi: "Kiper",
-        ttl: "Bogor, 05 Maret 2012",
-        usia: "14 Tahun",
-        ortu: "Bambang Anggara",
-        wa: "081234567804",
-        tglGabung: "05 Februari 2025",
-        kehadiran: "96%",
-        statusIuran: "Lunas",
-        catatan: "Refleks jempolan, komunikasi dengan bek semakin kompak.",
-        statusHariIni: "H"
-      }
-    ];
-
-    // 2. DATA JADWAL LATIHAN
-    let dataJadwal = [
-      {
-        id: 1,
-        fokus: "Passing Pendek & Kontrol Berarah",
-        hari: "Minggu, Sesi Sore",
-        waktu: "15:30 - 17:30 WIB",
-        ku: "KU-10 & KU-12",
-        lokasi: "Lapangan Utama SSB WMU",
-        status: "Rutin"
-      },
-      {
-        id: 2,
-        fokus: "Small-Sided Games 4v4 & Transisi",
-        hari: "Selasa, Sesi Sore",
-        waktu: "16:00 - 17:45 WIB",
-        ku: "KU-12 & KU-14",
-        lokasi: "Lapangan Rumput A WMU",
-        status: "Taktik"
-      },
-      {
-        id: 3,
-        fokus: "Finishing & Shooting Akurasi",
-        hari: "Kamis, Sesi Sore",
-        waktu: "16:00 - 17:30 WIB",
-        ku: "Semua KU",
-        lokasi: "Lapangan Utama SSB WMU",
-        status: "Teknik"
-      }
-    ];
-
-    // 3. DATA PERPUSTAKAAN MATERI LATIHAN
-    let dataMateri = [
-      {
-        id: 1,
-        judul: "Passing & Control Berorientasi",
-        kategori: "Teknik Dasar",
-        ku: "KU-10 & KU-12",
-        durasi: "25 Menit",
-        alat: "10 Bola, 12 Cone Marker, Rompi 2 Warna",
-        langkah: "Pemain membentuk formasi rondo 4v1 di dalam grid 8x8 meter. Pemain luar maksimal melakukan 2 sentuhan untuk mempertahankan bola.",
-        coachingPoints: "Buka badan saat menerima bola, gunakan kaki bagian dalam, pandangan terangkat (head-up play sebelum melepas umpan)."
-      },
-      {
-        id: 2,
-        judul: "Dribbling Speed & Zig-Zag Cone",
-        kategori: "Kondisi Fisik & Kelincahan",
-        ku: "Semua Kelompok Umur",
-        durasi: "20 Menit",
-        alat: "8 Cone Tiang (Agility Poles), 6 Bola",
-        langkah: "Atlet melakukan dribble mengitari cone tiang dengan tempo bertahap, diakhiri sprint kecil 5 meter menuju garis akhir.",
-        coachingPoints: "Sentuhan bola lembut di dekat kaki, gunakan kedua kaki bergantian, tekuk lutut untuk menjaga keseimbangan gravitasi tubuh."
-      },
-      {
-        id: 3,
-        judul: "Shooting Power & Penempatan Bola",
-        kategori: "Penyelesaian Akhir (Finishing)",
-        ku: "KU-12 & KU-14",
-        durasi: "30 Menit",
-        alat: "Gawang Standar, 12 Bola, 4 Cone Sasaran",
-        langkah: "Striker menerima cut-back pass dari pemain sayap, mengontrol 1 kali lalu melepaskan tembakan terarah ke pojok bawah gawang.",
-        coachingPoints: "Tumpuan kaki di sebelah bola mengarah ke gawang, kunci pergelangan kaki, kunci pandangan pada target."
-      },
-      {
-        id: 4,
-        judul: "Small-Sided Games (SSG 4v4 + 2 Netral)",
-        kategori: "Game Situasional & Taktik",
-        ku: "KU-12 & KU-14",
-        durasi: "30 Menit",
-        alat: "Lapangan 25x20 meter, 2 Gawang Mini, Bola",
-        langkah: "Bermain intensitas tinggi dengan waktu 4x5 menit. Tim yang menguasai bola memanfaatkan 2 pemain netral untuk menciptakan keunggulan jumlah.",
-        coachingPoints: "Cepat ciptakan opsi passing (segitiga pendukung), komunikasi verbal aktif, transisi bertahan secepat mungkin saat kehilangan bola."
-      }
-    ];
-
-    let currentRole = 'admin';
-    let selectedKUFilter = 'SEMUA';
-
-    // RENDER ATLET
-    function renderAtletList() {
-      const listContainer = document.getElementById('list-atlet');
-      const searchQuery = (document.getElementById('search-atlet')?.value || '').toLowerCase();
-      
-      let filtered = dataAtlet.filter(atlet => {
-        const matchSearch = atlet.nama.toLowerCase().includes(searchQuery) || atlet.posisi.toLowerCase().includes(searchQuery);
-        const matchKU = (selectedKUFilter === 'SEMUA') || (atlet.ku === selectedKUFilter);
-        return matchSearch && matchKU;
-      });
-
-      document.getElementById('stat-total-atlet').innerText = `${dataAtlet.length} Siswa`;
-
-      if (filtered.length === 0) {
-        listContainer.innerHTML = `<div class="text-center py-8 bg-white rounded-2xl border"><p class="text-xs text-gray-500">Data atlet tidak ditemukan.</p></div>`;
-        return;
-      }
-
-      listContainer.innerHTML = filtered.map(atlet => `
-        <div onclick="showDetailAtlet(${atlet.id})" class="bg-white p-3.5 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between active:scale-[0.98] transition cursor-pointer">
-          <div class="flex items-center space-x-3">
-            <div class="w-11 h-11 rounded-xl bg-emerald-100 text-[#0e3d22] font-black text-sm flex items-center justify-center border border-emerald-200">
-              #${atlet.noPunggung}
-            </div>
-            <div>
-              <div class="flex items-center gap-1.5">
-                <h4 class="text-xs font-bold text-gray-900">${atlet.nama}</h4>
-                <span class="text-[9px] bg-emerald-50 text-emerald-800 font-bold px-1.5 py-0.2 rounded border border-emerald-200">${atlet.ku}</span>
-              </div>
-              <p class="text-[11px] text-gray-500 mt-0.5">${atlet.posisi} • Kehadiran: <span class="font-bold text-emerald-700">${atlet.kehadiran}</span></p>
-            </div>
-          </div>
-          <i data-lucide="chevron-right" class="w-4 h-4 text-gray-400"></i>
-        </div>
-      `).join('');
-
-      lucide.createIcons();
-    }
-
-    // RENDER JADWAL
-    function renderJadwalList() {
-      const container = document.getElementById('list-jadwal');
-      if (dataJadwal.length === 0) {
-        container.innerHTML = `<p class="text-xs text-gray-400 text-center py-4">Belum ada jadwal.</p>`;
-        return;
-      }
-
-      // Update next schedule di dashboard
-      const next = dataJadwal[0];
-      document.getElementById('dashboard-next-schedule').innerHTML = `
+            <h3 class="text-xs font-bold te
