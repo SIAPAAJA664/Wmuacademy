@@ -223,4 +223,565 @@
       <div id="subview-absensi" class="space-y-3">
         <div class="bg-white p-3.5 rounded-2xl border border-gray-100 flex items-center justify-between">
           <div>
-            <h3 class="text-xs font-bold te
+            <h3 class="text-xs font-bold text-gray-900">Sesi Latihan Aktif</h3>
+            <p class="text-[11px] text-gray-500">Minggu Ini • Semua Kelompok Umur</p>
+          </div>
+          <span class="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full">Sesi Berjalan</span>
+        </div>
+
+        <div class="bg-yellow-50 p-2.5 rounded-xl border border-yellow-200 text-[11px] text-yellow-900">
+          💡 Sentuh tombol di samping nama: <strong>H</strong> (Hadir), <strong>I</strong> (Izin), <strong>S</strong> (Sakit), <strong>A</strong> (Alpa).
+        </div>
+
+        <div id="list-absensi-atlet" class="space-y-2.5">
+          <!-- Disuntikkan JS -->
+        </div>
+
+        <button type="button" onclick="simpanAbsensi()" class="w-full py-3 bg-[#0e3d22] text-white text-xs font-bold rounded-xl shadow-md active:scale-95 flex items-center justify-center gap-1.5 cursor-pointer">
+          <i data-lucide="check-circle" class="w-4 h-4 text-yellow-400"></i> Simpan Rekap Kehadiran
+        </button>
+      </div>
+
+      <!-- Jadwal -->
+      <div id="subview-jadwal" style="display: none;" class="space-y-3">
+        <div class="flex justify-between items-center">
+          <h3 class="text-xs font-bold text-gray-900">Agenda Latihan Rutin SSB</h3>
+          <button type="button" id="btn-tambah-jadwal" onclick="openModalTambahJadwal()" class="bg-[#0e3d22] text-white px-2.5 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1 border border-yellow-500 shadow-sm cursor-pointer">
+            <i data-lucide="plus" class="w-3.5 h-3.5"></i> Tambah Jadwal
+          </button>
+        </div>
+        <div id="list-jadwal" class="space-y-2.5">
+          <!-- Disuntikkan JS -->
+        </div>
+      </div>
+
+      <!-- Materi Drill -->
+      <div id="subview-materi" style="display: none;" class="space-y-3">
+        <div class="flex justify-between items-center">
+          <h3 class="text-xs font-bold text-gray-900">Kurikulum & Materi Drill WMU</h3>
+          <span class="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full">Standar SSB</span>
+        </div>
+        <div id="list-materi" class="space-y-3">
+          <!-- Disuntikkan JS -->
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ================= TAB 4: PLACEHOLDER TAHAP 6 ================= -->
+    <div id="view-placeholder" style="display: none;" class="p-8 text-center bg-white rounded-2xl border border-gray-100 space-y-2">
+      <div class="w-12 h-12 mx-auto rounded-full bg-emerald-50 text-emerald-700 flex items-center justify-center">
+        <i data-lucide="trophy" class="w-6 h-6"></i>
+      </div>
+      <h3 id="placeholder-title" class="text-sm font-bold text-gray-800">Menu Turnamen & Evaluasi</h3>
+      <p class="text-xs text-gray-500">Fitur ini siap diaktifkan pada Tahap 6 selanjutnya.</p>
+    </div>
+
+  </main>
+
+  <!-- ==================== MODAL TAMBAH JADWAL ==================== -->
+  <div id="modal-tambah-jadwal" style="display: none;" class="fixed inset-0 z-50 bg-black/70 flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="bg-white rounded-t-3xl sm:rounded-2xl max-w-md w-full p-5 space-y-4">
+      <div class="flex justify-between items-center border-b pb-3">
+        <h3 class="text-sm font-bold text-gray-900">Tambah Jadwal Latihan</h3>
+        <button type="button" onclick="closeModalTambahJadwal()" class="text-gray-400 hover:text-gray-700">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <form onsubmit="handleFormTambahJadwal(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="block font-bold text-gray-700 mb-1">Fokus / Topik Latihan</label>
+          <input type="text" id="jadwal-fokus" required placeholder="Contoh: Drill Passing & Shooting" class="w-full p-2.5 border rounded-xl">
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block font-bold text-gray-700 mb-1">Hari & Tanggal</label>
+            <input type="text" id="jadwal-hari" required placeholder="Minggu, 1 Nov" class="w-full p-2.5 border rounded-xl">
+          </div>
+          <div>
+            <label class="block font-bold text-gray-700 mb-1">Waktu</label>
+            <input type="text" id="jadwal-waktu" required placeholder="15:30 - 17:30" class="w-full p-2.5 border rounded-xl">
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block font-bold text-gray-700 mb-1">Kelompok Umur</label>
+            <select id="jadwal-ku" class="w-full p-2.5 border rounded-xl bg-white">
+              <option value="KU-10 & KU-12">KU-10 & KU-12</option>
+              <option value="KU-12 & KU-14">KU-12 & KU-14</option>
+              <option value="Semua KU">Semua KU</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-bold text-gray-700 mb-1">Lokasi Latihan</label>
+            <input type="text" id="jadwal-lokasi" required placeholder="Lapangan WMU Utama" class="w-full p-2.5 border rounded-xl">
+          </div>
+        </div>
+
+        <div class="pt-2 flex gap-2">
+          <button type="button" onclick="closeModalTambahJadwal()" class="w-1/2 py-2.5 bg-gray-100 text-gray-700 font-bold rounded-xl">Batal</button>
+          <button type="submit" class="w-1/2 py-2.5 bg-[#0e3d22] text-white font-bold rounded-xl shadow">Simpan Jadwal</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL TAMBAH ATLET ==================== -->
+  <div id="modal-tambah-atlet" style="display: none;" class="fixed inset-0 z-50 bg-black/70 flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="bg-white rounded-t-3xl sm:rounded-2xl max-w-md w-full max-h-[92vh] overflow-y-auto p-5 space-y-4">
+      <div class="flex justify-between items-center border-b pb-3">
+        <h3 class="text-sm font-bold text-gray-900 flex items-center gap-1.5">
+          <i data-lucide="user-plus" class="w-4 h-4 text-emerald-700"></i> Pendaftaran Atlet Baru
+        </h3>
+        <button type="button" onclick="closeModalTambahAtlet()" class="text-gray-400 hover:text-gray-700">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <form onsubmit="handleFormTambahAtlet(event)" class="space-y-3 text-xs">
+        <div>
+          <label class="block font-bold text-gray-700 mb-1">Nama Lengkap Atlet *</label>
+          <input type="text" id="input-nama" required placeholder="Contoh: Rian Pratama" class="w-full p-2.5 border rounded-xl focus:ring-2 focus:ring-[#0e3d22]">
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block font-bold text-gray-700 mb-1">Nomor Induk (NIA) *</label>
+            <input type="text" id="input-nia" required placeholder="WMU-2026-005" class="w-full p-2.5 border rounded-xl">
+          </div>
+          <div>
+            <label class="block font-bold text-gray-700 mb-1">No. Punggung *</label>
+            <input type="number" id="input-nomor" required placeholder="10" class="w-full p-2.5 border rounded-xl">
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block font-bold text-gray-700 mb-1">Kelompok Umur *</label>
+            <select id="input-ku" class="w-full p-2.5 border rounded-xl bg-white">
+              <option value="KU-10">KU-10</option>
+              <option value="KU-12">KU-12</option>
+              <option value="KU-14">KU-14</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-bold text-gray-700 mb-1">Posisi Bermain *</label>
+            <select id="input-posisi" class="w-full p-2.5 border rounded-xl bg-white">
+              <option value="Striker">Striker (FW)</option>
+              <option value="Gelandang">Gelandang (MF)</option>
+              <option value="Bek">Bek (DF)</option>
+              <option value="Kiper">Kiper (GK)</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <label class="block font-bold text-gray-700 mb-1">Nama Orang Tua / Wali *</label>
+          <input type="text" id="input-ortu" required placeholder="Nama Ayah / Ibu" class="w-full p-2.5 border rounded-xl">
+        </div>
+        <div>
+          <label class="block font-bold text-gray-700 mb-1">No. WhatsApp Orang Tua *</label>
+          <input type="tel" id="input-wa" required placeholder="081234567890" class="w-full p-2.5 border rounded-xl">
+        </div>
+        <div class="pt-2 flex gap-2">
+          <button type="button" onclick="closeModalTambahAtlet()" class="w-1/2 py-2.5 bg-gray-100 text-gray-700 font-bold rounded-xl">Batal</button>
+          <button type="submit" class="w-1/2 py-2.5 bg-[#0e3d22] text-white font-bold rounded-xl shadow">Simpan Atlet</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL RINCIAN PROFIL ATLET ==================== -->
+  <div id="modal-detail-atlet" style="display: none;" class="fixed inset-0 z-50 bg-black/60 flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="bg-white rounded-t-3xl sm:rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto p-5 space-y-4">
+      <div class="flex justify-between items-center border-b pb-3">
+        <h3 class="text-sm font-bold text-gray-900">Profil Lengkap Atlet</h3>
+        <button type="button" onclick="closeModalDetailAtlet()" class="text-gray-400 hover:text-gray-700">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <div id="detail-atlet-content" class="space-y-4 text-xs"></div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL DETAIL MATERI ==================== -->
+  <div id="modal-detail-materi" style="display: none;" class="fixed inset-0 z-50 bg-black/60 flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="bg-white rounded-t-3xl sm:rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto p-5 space-y-4">
+      <div class="flex justify-between items-center border-b pb-3">
+        <h3 class="text-sm font-bold text-gray-900">Panduan Modul Latihan</h3>
+        <button type="button" onclick="closeModalDetailMateri()" class="text-gray-400 hover:text-gray-700">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+      <div id="detail-materi-content" class="space-y-3 text-xs"></div>
+    </div>
+  </div>
+
+  <!-- ==================== BOTTOM NAVIGATION (TAB LAYAR HP) ==================== -->
+  <nav class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 shadow-2xl z-40 max-w-md mx-auto">
+    <div class="grid grid-cols-5 py-2">
+      <button type="button" onclick="switchTab('dashboard')" id="nav-btn-dashboard" class="flex flex-col items-center justify-center text-[#0e3d22] font-bold">
+        <i data-lucide="home" class="w-5 h-5"></i>
+        <span class="text-[10px] mt-1">Beranda</span>
+      </button>
+      <button type="button" onclick="switchTab('atlet')" id="nav-btn-atlet" class="flex flex-col items-center justify-center text-gray-400">
+        <i data-lucide="users" class="w-5 h-5"></i>
+        <span class="text-[10px] mt-1">Atlet</span>
+      </button>
+      <button type="button" onclick="switchTab('absensi')" id="nav-btn-absensi" class="flex flex-col items-center justify-center text-gray-400">
+        <i data-lucide="clipboard-check" class="w-5 h-5"></i>
+        <span class="text-[10px] mt-1">Absen/Drill</span>
+      </button>
+      <button type="button" onclick="switchTab('turnamen')" id="nav-btn-turnamen" class="flex flex-col items-center justify-center text-gray-400">
+        <i data-lucide="trophy" class="w-5 h-5"></i>
+        <span class="text-[10px] mt-1">Turnamen</span>
+      </button>
+      <button type="button" onclick="switchTab('akun')" id="nav-btn-akun" class="flex flex-col items-center justify-center text-gray-400">
+        <i data-lucide="user" class="w-5 h-5"></i>
+        <span class="text-[10px] mt-1">Akun</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ==================== LOGIKA JAVASCRIPT ==================== -->
+  <script>
+    // 1. DATA ATLET
+    let dataAtlet = [
+      { id: 1, nama: "Rian Pratama", nia: "WMU-2026-001", noPunggung: 10, ku: "KU-12", posisi: "Striker", ttl: "Jakarta, 12 Mei 2014", ortu: "Herman Pratama", wa: "081234567801", kehadiran: "95%", statusIuran: "Lunas", statusHariIni: "H" },
+      { id: 2, nama: "Fajar Maulana", nia: "WMU-2026-002", noPunggung: 7, ku: "KU-12", posisi: "Gelandang", ttl: "Bekasi, 18 Ags 2014", ortu: "Dedi Maulana", wa: "081234567802", kehadiran: "90%", statusIuran: "Lunas", statusHariIni: "H" },
+      { id: 3, nama: "Bagas Satria", nia: "WMU-2026-003", noPunggung: 4, ku: "KU-10", posisi: "Bek", ttl: "Depok, 22 Apr 2016", ortu: "Agus Satria", wa: "081234567803", kehadiran: "88%", statusIuran: "Menunggu", statusHariIni: "I" },
+      { id: 4, nama: "Dimas Anggara", nia: "WMU-2026-004", noPunggung: 1, ku: "KU-14", posisi: "Kiper", ttl: "Bogor, 05 Mar 2012", ortu: "Bambang Anggara", wa: "081234567804", kehadiran: "96%", statusIuran: "Lunas", statusHariIni: "H" }
+    ];
+
+    // 2. DATA JADWAL
+    let dataJadwal = [
+      { id: 1, fokus: "Passing Pendek & Kontrol Berarah", hari: "Minggu, Sesi Sore", waktu: "15:30 - 17:30 WIB", ku: "KU-10 & KU-12", lokasi: "Lapangan Utama SSB WMU", status: "Rutin" },
+      { id: 2, fokus: "Small-Sided Games 4v4 & Transisi", hari: "Selasa, Sesi Sore", waktu: "16:00 - 17:45 WIB", ku: "KU-12 & KU-14", lokasi: "Lapangan Rumput A WMU", status: "Taktik" }
+    ];
+
+    // 3. DATA MATERI
+    let dataMateri = [
+      { id: 1, judul: "Passing & Control Berorientasi", kategori: "Teknik Dasar", ku: "KU-10 & KU-12", durasi: "25 Menit", alat: "10 Bola, 12 Cone Marker", langkah: "Pemain membentuk rondo 4v1 di grid 8x8 meter. Maksimal 2 sentuhan.", coachingPoints: "Buka badan saat menerima bola, gunakan kaki bagian dalam, head-up play." },
+      { id: 2, judul: "Finishing & Shooting Power", kategori: "Penyelesaian Akhir", ku: "KU-12 & KU-14", durasi: "30 Menit", alat: "Gawang Standar, 12 Bola", langkah: "Striker menerima passing cut-back lalu menembak terarah ke sudut gawang.", coachingPoints: "Kunci pergelangan kaki, tumpuan kaki sejajar bola mengarah ke gawang." }
+    ];
+
+    let currentRole = 'admin';
+    let selectedKUFilter = 'SEMUA';
+
+    // FUNGSI UTAMA: LOGIN
+    function loginSebagai(role) {
+      currentRole = role;
+      
+      // Update label di header dan dashboard
+      document.getElementById('header-user-role').innerText = role.toUpperCase();
+      document.getElementById('badge-role-pill').innerText = role.toUpperCase();
+      document.getElementById('dashboard-user-name').innerText = 
+        role === 'admin' ? 'Budi Santoso (Admin)' :
+        role === 'pelatih' ? 'Coach Hendra Gunawan' :
+        role === 'atlet' ? 'Rian Pratama' : 'Bpk. Herman (Wali Murid)';
+
+      // Atur tombol tambah berdasarkan peran
+      const quickAdd = document.getElementById('admin-quick-add-container');
+      const tabAdd = document.getElementById('btn-tambah-atlet-tab');
+      const btnAddJadwal = document.getElementById('btn-tambah-jadwal');
+
+      if (role === 'admin') {
+        if (quickAdd) quickAdd.style.display = 'block';
+        if (tabAdd) tabAdd.style.display = 'flex';
+        if (btnAddJadwal) btnAddJadwal.style.display = 'flex';
+      } else if (role === 'pelatih') {
+        if (quickAdd) quickAdd.style.display = 'none';
+        if (tabAdd) tabAdd.style.display = 'none';
+        if (btnAddJadwal) btnAddJadwal.style.display = 'flex';
+      } else {
+        if (quickAdd) quickAdd.style.display = 'none';
+        if (tabAdd) tabAdd.style.display = 'none';
+        if (btnAddJadwal) btnAddJadwal.style.display = 'none';
+      }
+
+      // TUTUP MODAL LOGIN SECARA LANGSUNG
+      document.getElementById('login-modal').style.display = 'none';
+      switchTab('dashboard');
+    }
+
+    function bukaLayarLogin() {
+      document.getElementById('login-modal').style.display = 'flex';
+    }
+
+    // GANTI TAB NAVIGASI
+    function switchTab(tabName) {
+      document.getElementById('view-dashboard').style.display = 'none';
+      document.getElementById('view-atlet').style.display = 'none';
+      document.getElementById('view-absensi').style.display = 'none';
+      document.getElementById('view-placeholder').style.display = 'none';
+
+      ['dashboard', 'atlet', 'absensi', 'turnamen', 'akun'].forEach(t => {
+        const btn = document.getElementById(`nav-btn-${t}`);
+        if (btn) btn.className = "flex flex-col items-center justify-center text-gray-400";
+      });
+
+      const activeBtn = document.getElementById(`nav-btn-${tabName}`);
+      if (activeBtn) activeBtn.className = "flex flex-col items-center justify-center text-[#0e3d22] font-bold";
+
+      if (tabName === 'dashboard') {
+        document.getElementById('view-dashboard').style.display = 'block';
+      } else if (tabName === 'atlet') {
+        document.getElementById('view-atlet').style.display = 'block';
+        renderAtletList();
+      } else if (tabName === 'absensi') {
+        document.getElementById('view-absensi').style.display = 'block';
+        renderAbsensiList();
+        renderJadwalList();
+        renderMateriList();
+      } else {
+        document.getElementById('view-placeholder').style.display = 'block';
+        document.getElementById('placeholder-title').innerText = `Menu ${tabName.toUpperCase()}`;
+      }
+      lucide.createIcons();
+    }
+
+    // SUB-TAB JADWAL / MATERI / ABSEN
+    function switchSubTab(sub) {
+      document.getElementById('subview-absensi').style.display = 'none';
+      document.getElementById('subview-jadwal').style.display = 'none';
+      document.getElementById('subview-materi').style.display = 'none';
+
+      ['absensi', 'jadwal', 'materi'].forEach(s => {
+        const b = document.getElementById(`subtab-btn-${s}`);
+        if (b) b.className = "py-2 rounded-lg text-gray-600";
+      });
+
+      const activeB = document.getElementById(`subtab-btn-${sub}`);
+      if (activeB) activeB.className = "py-2 rounded-lg bg-white text-[#0e3d22] shadow-sm";
+
+      if (sub === 'absensi') {
+        document.getElementById('subview-absensi').style.display = 'block';
+        renderAbsensiList();
+      } else if (sub === 'jadwal') {
+        document.getElementById('subview-jadwal').style.display = 'block';
+        renderJadwalList();
+      } else if (sub === 'materi') {
+        document.getElementById('subview-materi').style.display = 'block';
+        renderMateriList();
+      }
+      lucide.createIcons();
+    }
+
+    // RENDER ATLET
+    function renderAtletList() {
+      const container = document.getElementById('list-atlet');
+      const q = (document.getElementById('search-atlet')?.value || '').toLowerCase();
+      let filtered = dataAtlet.filter(a => {
+        const mQ = a.nama.toLowerCase().includes(q) || a.posisi.toLowerCase().includes(q);
+        const mKU = (selectedKUFilter === 'SEMUA') || (a.ku === selectedKUFilter);
+        return mQ && mKU;
+      });
+
+      document.getElementById('stat-total-atlet').innerText = `${dataAtlet.length} Siswa`;
+
+      container.innerHTML = filtered.map(a => `
+        <div onclick="showDetailAtlet(${a.id})" class="bg-white p-3.5 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between active:scale-[0.98] transition cursor-pointer">
+          <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-xl bg-emerald-100 text-[#0e3d22] font-black text-sm flex items-center justify-center border border-emerald-200">
+              #${a.noPunggung}
+            </div>
+            <div>
+              <div class="flex items-center gap-1.5">
+                <h4 class="text-xs font-bold text-gray-900">${a.nama}</h4>
+                <span class="text-[9px] bg-emerald-50 text-emerald-800 font-bold px-1.5 py-0.2 rounded border border-emerald-200">${a.ku}</span>
+              </div>
+              <p class="text-[11px] text-gray-500 mt-0.5">${a.posisi} • Kehadiran: <span class="font-bold text-emerald-700">${a.kehadiran}</span></p>
+            </div>
+          </div>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-gray-400"></i>
+        </div>
+      `).join('');
+      lucide.createIcons();
+    }
+
+    // RENDER ABSENSI
+    function renderAbsensiList() {
+      const container = document.getElementById('list-absensi-atlet');
+      container.innerHTML = dataAtlet.map(a => {
+        const s = a.statusHariIni || 'H';
+        return `
+          <div class="bg-white p-3 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between">
+            <div class="flex items-center space-x-2.5">
+              <div class="w-8 h-8 rounded-lg bg-emerald-50 text-[#0e3d22] font-bold text-xs flex items-center justify-center">
+                #${a.noPunggung}
+              </div>
+              <div>
+                <h4 class="text-xs font-bold text-gray-900">${a.nama}</h4>
+                <p class="text-[10px] text-gray-500">${a.ku} • ${a.posisi}</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-1">
+              <button type="button" onclick="setStatusAbsen(${a.id}, 'H')" class="w-7 h-7 rounded-lg text-xs font-black transition cursor-pointer ${s === 'H' ? 'bg-emerald-600 text-white shadow-sm' : 'bg-gray-100 text-gray-600'}">H</button>
+              <button type="button" onclick="setStatusAbsen(${a.id}, 'I')" class="w-7 h-7 rounded-lg text-xs font-black transition cursor-pointer ${s === 'I' ? 'bg-blue-600 text-white shadow-sm' : 'bg-gray-100 text-gray-600'}">I</button>
+              <button type="button" onclick="setStatusAbsen(${a.id}, 'S')" class="w-7 h-7 rounded-lg text-xs font-black transition cursor-pointer ${s === 'S' ? 'bg-amber-500 text-white shadow-sm' : 'bg-gray-100 text-gray-600'}">S</button>
+              <button type="button" onclick="setStatusAbsen(${a.id}, 'A')" class="w-7 h-7 rounded-lg text-xs font-black transition cursor-pointer ${s === 'A' ? 'bg-red-600 text-white shadow-sm' : 'bg-gray-100 text-gray-600'}">A</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function setStatusAbsen(id, status) {
+      if (currentRole === 'atlet' || currentRole === 'orangtua') {
+        alert('Hanya Pelatih dan Admin yang memiliki izin mengubah absensi!');
+        return;
+      }
+      const a = dataAtlet.find(x => x.id === id);
+      if (a) {
+        a.statusHariIni = status;
+        renderAbsensiList();
+      }
+    }
+
+    function simpanAbsensi() {
+      if (currentRole === 'atlet' || currentRole === 'orangtua') {
+        alert('Hanya Pelatih dan Admin yang berhak menyimpan absensi!');
+        return;
+      }
+      const total = dataAtlet.length;
+      const hadir = dataAtlet.filter(a => a.statusHariIni === 'H').length;
+      const persen = Math.round((hadir / total) * 100);
+      document.getElementById('stat-presensi-hari').innerText = `${persen}%`;
+      alert(`Absensi tersimpan! Kehadiran sesi hari ini: ${persen}%`);
+    }
+
+    // RENDER JADWAL
+    function renderJadwalList() {
+      const container = document.getElementById('list-jadwal');
+      const next = dataJadwal[0];
+      if (next) {
+        document.getElementById('dashboard-next-schedule').innerHTML = `
+          <div class="flex justify-between items-center">
+            <span class="text-xs font-bold text-gray-900">${next.fokus}</span>
+            <span class="text-[10px] bg-yellow-400 text-gray-950 font-bold px-1.5 py-0.2 rounded">${next.ku}</span>
+          </div>
+          <p class="text-[11px] text-gray-600 flex items-center gap-1">
+            <i data-lucide="clock" class="w-3.5 h-3.5 text-gray-400"></i> ${next.hari} (${next.waktu})
+          </p>
+        `;
+      }
+
+      container.innerHTML = dataJadwal.map(j => `
+        <div class="bg-white p-3.5 rounded-2xl shadow-sm border border-gray-100 space-y-1">
+          <div class="flex justify-between">
+            <h4 class="text-xs font-bold text-gray-900">${j.fokus}</h4>
+            <span class="text-[10px] bg-emerald-50 text-emerald-800 font-bold px-2 py-0.5 rounded">${j.ku}</span>
+          </div>
+          <p class="text-[11px] text-gray-600">${j.hari} • ${j.waktu}</p>
+          <p class="text-[11px] text-gray-500">${j.lokasi}</p>
+        </div>
+      `).join('');
+      lucide.createIcons();
+    }
+
+    // RENDER MATERI
+    function renderMateriList() {
+      const container = document.getElementById('list-materi');
+      container.innerHTML = dataMateri.map(m => `
+        <div onclick="showDetailMateri(${m.id})" class="bg-white p-3.5 rounded-2xl shadow-sm border border-gray-100 space-y-2 cursor-pointer active:scale-98 transition">
+          <div class="flex justify-between">
+            <span class="text-[10px] bg-emerald-50 text-emerald-800 font-bold px-2 py-0.5 rounded">${m.kategori}</span>
+            <span class="text-[10px] text-gray-500">${m.durasi}</span>
+          </div>
+          <h4 class="text-xs font-bold text-gray-900">${m.judul}</h4>
+          <p class="text-[11px] text-gray-500">${m.langkah}</p>
+        </div>
+      `).join('');
+      lucide.createIcons();
+    }
+
+    function showDetailMateri(id) {
+      const m = dataMateri.find(x => x.id === id);
+      if (!m) return;
+      document.getElementById('detail-materi-content').innerHTML = `
+        <h3 class="text-sm font-bold text-gray-900">${m.judul}</h3>
+        <p class="text-[11px] text-gray-500">Kategori: ${m.kategori} • ${m.durasi}</p>
+        <div class="bg-gray-50 p-2.5 rounded-xl border"><p class="font-bold text-[11px]">Peralatan:</p><p class="text-[11px] text-gray-600">${m.alat}</p></div>
+        <div><p class="font-bold text-[11px]">Pelaksanaan:</p><p class="text-[11px] text-gray-600">${m.langkah}</p></div>
+        <div class="bg-yellow-50 p-2.5 rounded-xl border border-yellow-200"><p class="font-bold text-yellow-950 text-[11px]">Coaching Points:</p><p class="text-[11px] text-yellow-800 italic">${m.coachingPoints}</p></div>
+      `;
+      document.getElementById('modal-detail-materi').style.display = 'flex';
+      lucide.createIcons();
+    }
+    function closeModalDetailMateri() { document.getElementById('modal-detail-materi').style.display = 'none'; }
+
+    // MODAL DIALOGS
+    function openModalTambahAtlet() { document.getElementById('modal-tambah-atlet').style.display = 'flex'; lucide.createIcons(); }
+    function closeModalTambahAtlet() { document.getElementById('modal-tambah-atlet').style.display = 'none'; }
+    function openModalTambahJadwal() { document.getElementById('modal-tambah-jadwal').style.display = 'flex'; lucide.createIcons(); }
+    function closeModalTambahJadwal() { document.getElementById('modal-tambah-jadwal').style.display = 'none'; }
+
+    function handleFormTambahAtlet(e) {
+      e.preventDefault();
+      const nama = document.getElementById('input-nama').value;
+      const nia = document.getElementById('input-nia').value;
+      const noPunggung = parseInt(document.getElementById('input-nomor').value);
+      const ku = document.getElementById('input-ku').value;
+      const posisi = document.getElementById('input-posisi').value;
+      const ortu = document.getElementById('input-ortu').value;
+      const wa = document.getElementById('input-wa').value;
+
+      dataAtlet.unshift({
+        id: dataAtlet.length + 1, nama, nia, noPunggung, ku, posisi, ttl: "Jakarta, 2014", ortu, wa, kehadiran: "100%", statusIuran: "Lunas", statusHariIni: "H"
+      });
+
+      closeModalTambahAtlet();
+      switchTab('atlet');
+      renderAtletList();
+      alert(`Atlet ${nama} berhasil didaftarkan!`);
+      e.target.reset();
+    }
+
+    function handleFormTambahJadwal(e) {
+      e.preventDefault();
+      const fokus = document.getElementById('jadwal-fokus').value;
+      const hari = document.getElementById('jadwal-hari').value;
+      const waktu = document.getElementById('jadwal-waktu').value;
+      const ku = document.getElementById('jadwal-ku').value;
+      const lokasi = document.getElementById('jadwal-lokasi').value;
+
+      dataJadwal.unshift({ id: dataJadwal.length + 1, fokus, hari, waktu, ku, lokasi, status: "Baru" });
+      closeModalTambahJadwal();
+      renderJadwalList();
+      alert("Jadwal latihan baru berhasil ditambahkan!");
+      e.target.reset();
+    }
+
+    function filterKU(ku) {
+      selectedKUFilter = ku;
+      renderAtletList();
+    }
+    function filterAtlet() { renderAtletList(); }
+
+    function showDetailAtlet(id) {
+      const a = dataAtlet.find(x => x.id === id);
+      if (!a) return;
+      document.getElementById('detail-atlet-content').innerHTML = `
+        <div class="text-center pb-2 border-b">
+          <div class="w-14 h-14 mx-auto rounded-2xl bg-[#0e3d22] text-yellow-400 font-black text-xl flex items-center justify-center border-2 border-yellow-400">#${a.noPunggung}</div>
+          <h3 class="text-sm font-bold text-gray-900 mt-2">${a.nama}</h3>
+          <p class="text-[11px] text-gray-500">${a.nia} • ${a.posisi} • ${a.ku}</p>
+        </div>
+        <div class="space-y-2">
+          <div class="flex justify-between border-b pb-1"><span>Wali:</span><span class="font-bold">${a.ortu}</span></div>
+          <div class="flex justify-between border-b pb-1"><span>WhatsApp:</span><span class="font-bold text-emerald-700">${a.wa}</span></div>
+          <div class="flex justify-between border-b pb-1"><span>Presensi:</span><span class="font-bold text-emerald-700">${a.kehadiran}</span></div>
+        </div>
+      `;
+      document.getElementById('modal-detail-atlet').style.display = 'flex';
+      lucide.createIcons();
+    }
+    function closeModalDetailAtlet() { document.getElementById('modal-detail-atlet').style.display = 'none'; }
+
+    // RENDER AWAL
+    renderAtletList();
+    renderJadwalList();
+    renderAbsensiList();
+    renderMateriList();
+    lucide.createIcons();
+  </script>
+</body>
+</html>
